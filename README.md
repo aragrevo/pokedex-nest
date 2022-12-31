@@ -17,6 +17,12 @@ $ yarn install
 docker-compose up -d
 ```
 
+## Build seed data
+
+```bash
+http://localhost:3000/api/v2/seed
+```
+
 ## Running the app
 
 ```bash

@@ -82,6 +82,11 @@ export class PokemonService {
     return;
   }
 
+  async seedDB(pokemons: { name: string; no: number }[]) {
+    await this.pokemonModel.deleteMany();
+    await this.pokemonModel.insertMany(pokemons);
+  }
+
   private handleExceptions(error: any, msg: string) {
     if (error.code === 11000)
       throw new BadRequestException(
