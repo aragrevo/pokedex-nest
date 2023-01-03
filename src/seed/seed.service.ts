@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { AxiosAdapter } from 'src/common/adapters/axios.adapter';
 import { PokemonService } from 'src/pokemon/pokemon.service';
@@ -8,12 +9,14 @@ export class SeedService {
   constructor(
     private readonly http: AxiosAdapter,
     private readonly pokemonSvc: PokemonService,
+    private readonly configService: ConfigService,
   ) {}
 
   async executeSeed() {
-    const data = await this.http.get<any>(
-      'https://pokeapi.co/api/v2/pokemon?limit=650',
-    );
+    const env = this.configService.get('environment');
+    if (env !== 'dev') return 'Only executed in DEV Enviroment';
+    const pokeapi = this.configService.get('pokeapi');
+    const data = await this.http.get<any>(`${pokeapi}?limit=650`);
     const pokemons = data.results.map(({ name, url }) => {
       const segments = url.split('/');
       const id = +segments[6];
