@@ -3,4 +3,5 @@ export const EnvConfiguration = () => ({
   mongodb: process.env.MONGODB,
   port: +process.env.PORT || 3000,
   pokeapi: process.env.POKEAPI,
+  limit: process.env.LIMIT || 150,
 });

@@ -15,8 +15,9 @@ export class SeedService {
   async executeSeed() {
     const env = this.configService.get('environment');
     if (env !== 'dev') return 'Only executed in DEV Enviroment';
+    const limit = this.configService.get('limit');
     const pokeapi = this.configService.get('pokeapi');
-    const data = await this.http.get<any>(`${pokeapi}?limit=650`);
+    const data = await this.http.get<any>(`${pokeapi}?limit=${limit}`);
     const pokemons = data.results.map(({ name, url }) => {
       const segments = url.split('/');
       const id = +segments[6];
