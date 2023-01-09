@@ -81,7 +81,9 @@ export class PokemonService {
     if (deletedCount === 0)
       throw new BadRequestException(`Pokemon with id "${id}" not found`);
 
-    return;
+    return {
+      ok: true,
+    };
   }
 
   async seedDB(pokemons: { name: string; no: number }[]) {
