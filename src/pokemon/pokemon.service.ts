@@ -31,7 +31,7 @@ export class PokemonService {
 
   findAll(paginationDto: PaginationDto) {
     const { limit = 10, offset = 0 } = paginationDto;
-    return this.pokemonModel.find().limit(limit).skip(offset);
+    return this.pokemonModel.find().sort({ no: -1 }).limit(limit).skip(offset);
   }
 
   async findOne(id: string) {
